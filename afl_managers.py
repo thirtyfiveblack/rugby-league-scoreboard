@@ -7,17 +7,17 @@ from typing import Any, Dict, List, Optional
 import pytz
 import requests
 
-from basketball import Basketball, BasketballLive
+from australian-football import AustralianFootball, AustralianFootballLive
 from sports import SportsRecent, SportsUpcoming
 
 # Constants
-ESPN_NBA_SCOREBOARD_URL = (
-    "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard"
+ESPN_AFL_SCOREBOARD_URL = (
+    "https://site.api.espn.com/apis/site/v2/sports/australian-football/afl/scoreboard"
 )
 
 
-class BaseNBAManager(Basketball):
-    """Base class for NBA managers with common functionality."""
+class BaseAFLManager(AustralianFootball):
+    """Base class for AFL managers with common functionality."""
 
     # Class variables for warning tracking
     _no_data_warning_logged = False
@@ -27,7 +27,7 @@ class BaseNBAManager(Basketball):
     _last_shared_update = 0
 
     def __init__(self, config: Dict[str, Any], display_manager, cache_manager):
-        self.logger = logging.getLogger("NBA")
+        self.logger = logging.getLogger("AFL")
         super().__init__(
             config=config,
             display_manager=display_manager,
@@ -38,9 +38,9 @@ class BaseNBAManager(Basketball):
 
         # Check display modes to determine what data to fetch
         display_modes = self.mode_config.get("display_modes", {})
-        self.recent_enabled = display_modes.get("nba_recent", False)
-        self.upcoming_enabled = display_modes.get("nba_upcoming", False)
-        self.live_enabled = display_modes.get("nba_live", False)
+        self.recent_enabled = display_modes.get("afl_recent", False)
+        self.upcoming_enabled = display_modes.get("afl_upcoming", False)
+        self.live_enabled = display_modes.get("afl_live", False)
 
         self.logger.info(
             f"Initialized NBA manager with display dimensions: {self.display_width}x{self.display_height}"
@@ -49,18 +49,19 @@ class BaseNBAManager(Basketball):
         self.logger.info(
             f"Display modes - Recent: {self.recent_enabled}, Upcoming: {self.upcoming_enabled}, Live: {self.live_enabled}"
         )
-        self.league = "nba"
+        self.league = "afl"
 
-    def _fetch_nba_api_data(self, use_cache: bool = True) -> Optional[Dict]:
+    def _fetch_afl_api_data(self, use_cache: bool = True) -> Optional[Dict]:
         """
-        Fetches the full season schedule for NBA using background threading.
+        Fetches the full season schedule for AFL using background threading.
         Returns cached data immediately if available, otherwise starts background fetch.
         """
         now = datetime.now(pytz.utc)
         season_year = now.year
-        # NBA season typically runs from October to June
-        if now.month < 10:
-            season_year = now.year - 1
+        # AFL season typically runs from February to October
+        #if now.month < 10:
+            #season_year = now.year - 1
+        season_year = now.year
         datestring = f"{season_year}1001-{season_year+1}0630"
         cache_key = f"{self.sport_key}_schedule_{season_year}"
 
@@ -114,9 +115,9 @@ class BaseNBAManager(Basketball):
 
             # Submit background fetch request
             request_id = self.background_service.submit_fetch_request(
-                sport="basketball",
+                sport="australian-football",
                 year=season_year,
-                url=ESPN_NBA_SCOREBOARD_URL,
+                url=ESPN_AFL_SCOREBOARD_URL,
                 cache_key=cache_key,
                 params={"dates": datestring, "limit": 1000},
                 headers=self.headers,
@@ -140,7 +141,7 @@ class BaseNBAManager(Basketball):
             )
             try:
                 response = self.session.get(
-                    ESPN_NBA_SCOREBOARD_URL,
+                    ESPN_AFL_SCOREBOARD_URL,
                     params={"dates": datestring, "limit": 1000},
                     headers=self.headers,
                     timeout=30,
@@ -159,41 +160,41 @@ class BaseNBAManager(Basketball):
 
     def _fetch_data(self) -> Optional[Dict]:
         """Fetch data using shared data mechanism or direct fetch for live."""
-        if isinstance(self, NBALiveManager):
+        if isinstance(self, AFLLiveManager):
             # Live games should fetch only current games, not entire season
             return self._fetch_todays_games()
         else:
             # Recent and Upcoming managers should use cached season data
-            return self._fetch_nba_api_data(use_cache=True)
+            return self._fetch_afl_api_data(use_cache=True)
 
 
-class NBALiveManager(BaseNBAManager, BasketballLive):
-    """Manager for live NBA games."""
-
-    def __init__(self, config: Dict[str, Any], display_manager, cache_manager):
-        super().__init__(config, display_manager, cache_manager)
-        self.logger = logging.getLogger("NBALiveManager")
-        self.logger.info("Initialized NBALiveManager in live mode")
-
-
-class NBARecentManager(BaseNBAManager, SportsRecent):
-    """Manager for recently completed NBA games."""
+class AFLLiveManager(BaseAFLManager, AustralianFootballLive):
+    """Manager for live AFL games."""
 
     def __init__(self, config: Dict[str, Any], display_manager, cache_manager):
         super().__init__(config, display_manager, cache_manager)
-        self.logger = logging.getLogger("NBARecentManager")
+        self.logger = logging.getLogger("AFLLiveManager")
+        self.logger.info("Initialized AFLLiveManager in live mode")
+
+
+class AFLRecentManager(BaseAFLManager, SportsRecent):
+    """Manager for recently completed AFL games."""
+
+    def __init__(self, config: Dict[str, Any], display_manager, cache_manager):
+        super().__init__(config, display_manager, cache_manager)
+        self.logger = logging.getLogger("AFLRecentManager")
         self.logger.info(
-            f"Initialized NBARecentManager with {len(self.favorite_teams)} favorite teams"
+            f"Initialized AFLRecentManager with {len(self.favorite_teams)} favorite teams"
         )
 
 
-class NBAUpcomingManager(BaseNBAManager, SportsUpcoming):
-    """Manager for upcoming NBA games."""
+class AFLUpcomingManager(BaseAFLManager, SportsUpcoming):
+    """Manager for upcoming AFL games."""
 
     def __init__(self, config: Dict[str, Any], display_manager, cache_manager):
         super().__init__(config, display_manager, cache_manager)
-        self.logger = logging.getLogger("NBAUpcomingManager")
+        self.logger = logging.getLogger("AFLUpcomingManager")
         self.logger.info(
-            f"Initialized NBAUpcomingManager with {len(self.favorite_teams)} favorite teams"
+            f"Initialized AFLUpcomingManager with {len(self.favorite_teams)} favorite teams"
         )
 
