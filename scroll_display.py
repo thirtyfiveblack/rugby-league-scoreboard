@@ -53,7 +53,7 @@ class ScrollDisplay:
     """
     
     # Paths to league separator icons
-    AFL_SEPARATOR_ICON = "logos/AFL.png" #"assets/sports/afl_logos/AFL.png"
+    AFL_SEPARATOR_ICON = "plugin-repos/australian-football-scoreboard/logos/AFL.png" #"assets/sports/afl_logos/AFL.png"
     WNBA_SEPARATOR_ICON = "assets/sports/wnba_logos/WNBA.png"
     NCAA_SEPARATOR_ICON = "assets/sports/ncaa_logos/NCAA.png"  # Generic NCAA logo, or use league-specific if available
     MARCH_MADNESS_SEPARATOR_ICON = "assets/sports/ncaa_logos/MARCH_MADNESS.png"
