@@ -7,13 +7,13 @@ import time
 from sports import SportsCore, SportsLive
 from data_sources import ESPNDataSource
 
-class Basketball(SportsCore):
-    """Base class for basketball sports with common functionality."""
+class AustralianFootball(SportsCore):
+    """Base class for australian football sports with common functionality."""
 
     def __init__(self, config: Dict[str, Any], display_manager, cache_manager, logger: logging.Logger, sport_key: str):
         super().__init__(config, display_manager, cache_manager, logger, sport_key)
         self.data_source = ESPNDataSource(logger)
-        self.sport = "basketball"
+        self.sport = "australian-football"
 
     def _fetch_team_record(self, team_id: str) -> str:
         """Fetch a team's current overall record from the ESPN team endpoint."""
@@ -64,7 +64,7 @@ class Basketball(SportsCore):
                                 comp["record"] = [{"displayValue": opp_record, "type": "total"}]
 
     def _extract_game_details(self, game_event: Dict) -> Optional[Dict]:
-        """Extract relevant game details from ESPN Basketball API response."""
+        """Extract relevant game details from ESPN Australian Football API response."""
         details, home_team, away_team, status, situation = self._extract_game_details_common(game_event)
         if details is None or home_team is None or away_team is None or status is None:
             return
@@ -109,7 +109,7 @@ class Basketball(SportsCore):
             self.logger.error(f"Error extracting game details: {e} from event: {game_event.get('id')}", exc_info=True)
             return None
 
-class BasketballLive(Basketball, SportsLive):
+class AustralianFootballLive(AustralianFootball, SportsLive):
     def __init__(self, config: Dict[str, Any], display_manager, cache_manager, logger: logging.Logger, sport_key: str):
         super().__init__(config, display_manager, cache_manager, logger, sport_key)
 
