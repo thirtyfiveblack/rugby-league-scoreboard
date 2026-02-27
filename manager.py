@@ -145,7 +145,7 @@ class AustralianFootballScoreboardPlugin(BasePlugin if BasePlugin else object):
         # Enable high-FPS mode for scroll display (allows 100+ FPS scrolling)
         self.enable_scrolling = self._scroll_manager is not None
         if self.enable_scrolling:
-            self.logger.info("High-FPS scrolling enabled for basketball scoreboard")
+            self.logger.info("High-FPS scrolling enabled for Australian Football scoreboard")
 
         # League registry: maps league IDs to their configuration and managers
         # This structure makes it easy to add more leagues in the future
@@ -2096,7 +2096,7 @@ class AustralianFootballScoreboardPlugin(BasePlugin if BasePlugin else object):
         
         # Parse granular mode name if applicable (e.g., "afl_recent", "wnba_upcoming")
         league = None
-        if "_" in display_mode and not display_mode.startswith("basketball_"):
+        if "_" in display_mode and not display_mode.startswith("afl_"):
             # Granular mode: extract league
             # Handle ncaam and ncaaw with multiple underscores
             if display_mode.startswith("ncaam_"):
