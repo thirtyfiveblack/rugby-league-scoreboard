@@ -17,7 +17,7 @@ ESPN_WNBA_SCOREBOARD_URL = (
 )
 
 
-class BaseWNBAManager(Basketball):
+class BaseWNBAManager(AustralianFootball):
     """Base class for WNBA managers with common functionality."""
 
     # Class variables for warning tracking
@@ -156,7 +156,7 @@ class BaseWNBAManager(Basketball):
             return self._fetch_wnba_api_data(use_cache=True)
 
 
-class WNBALiveManager(BaseWNBAManager, BasketballLive):
+class WNBALiveManager(BaseWNBAManager, AustralianFootballLive):
     """Manager for live WNBA games."""
 
     def __init__(self, config: Dict[str, Any], display_manager, cache_manager):
