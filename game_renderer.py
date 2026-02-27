@@ -60,7 +60,8 @@ class GameRenderer:
         
         # Get logo directories from config
         self.logo_dirs = {
-            'afl': config.get('afl', {}).get('logo_dir', 'assets/sports/afl_logos'),
+            #'afl': config.get('afl', {}).get('logo_dir', 'assets/sports/afl_logos'),
+            'afl': config.get('afl', {}).get('logo_dir', 'plugin-repos/australian-football-scoreboard/logos'),
         }
         
         # Display options - check per-league display_options in config
