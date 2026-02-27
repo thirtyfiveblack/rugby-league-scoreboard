@@ -7,7 +7,7 @@ from typing import Any, Dict, List, Optional
 import pytz
 import requests
 
-from australian_football import AustralianFootball, AustralianFootballLive
+from australianfootball import AustralianFootball, AustralianFootballLive
 from sports import SportsRecent, SportsUpcoming
 
 # Constants
