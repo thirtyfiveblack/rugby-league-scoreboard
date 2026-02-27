@@ -1,5 +1,5 @@
 """
-Game Renderer for Basketball Scoreboard Plugin
+Game Renderer for Australian Football Scoreboard Plugin
 
 Extracts game rendering logic into a reusable component for scroll display mode.
 Returns PIL Images instead of updating display directly.
@@ -60,10 +60,7 @@ class GameRenderer:
         
         # Get logo directories from config
         self.logo_dirs = {
-            'nba': config.get('nba', {}).get('logo_dir', 'assets/sports/nba_logos'),
-            'wnba': config.get('wnba', {}).get('logo_dir', 'assets/sports/wnba_logos'),
-            'ncaam': config.get('ncaam', {}).get('logo_dir', 'assets/sports/ncaa_logos'),
-            'ncaaw': config.get('ncaaw', {}).get('logo_dir', 'assets/sports/ncaa_logos'),
+            'afl': config.get('afl', {}).get('logo_dir', 'assets/sports/afl_logos'),
         }
         
         # Display options - check per-league display_options in config
@@ -73,7 +70,7 @@ class GameRenderer:
         self.show_ranking = False
         # Per-league March Madness settings (ncaam/ncaaw can differ)
         self._march_madness_by_league: Dict[str, Dict[str, bool]] = {}
-        for league_key in ('nba', 'wnba', 'ncaam', 'ncaaw'):
+        for league_key in ('afl', 'vfl'):
             league_config = config.get(league_key, {})
             if league_config.get('enabled', False):
                 display_options = league_config.get('display_options', {})
@@ -182,7 +179,7 @@ class GameRenderer:
             logo_dir: Path to logo directory
         """
         for game in games:
-            league = game.get('league', 'nba')
+            league = game.get('league', 'afl')
             for team_key in ['home_abbr', 'away_abbr']:
                 abbr = game.get(team_key, '')
                 if abbr:
@@ -207,9 +204,9 @@ class GameRenderer:
         Load and resize a team logo with caching.
         
         Args:
-            team_abbrev: Team abbreviation (e.g., 'LAL', 'GSW')
+            team_abbrev: Team abbreviation (e.g., 'MELB', 'RICH')
             logo_path: Path to the logo file
-            league: League identifier (e.g., 'nba', 'wnba', 'ncaam', 'ncaaw')
+            league: League identifier (e.g., 'afl', 'vfl')
             
         Returns:
             PIL Image of the logo, or None if loading failed
@@ -241,7 +238,7 @@ class GameRenderer:
                 return logo
             else:
                 # Try to load from league-specific logo directory
-                logo_dir = Path(self.logo_dirs.get(league, 'assets/sports/nba_logos'))
+                logo_dir = Path(self.logo_dirs.get(league, 'assets/sports/afl_logos'))
                 logo_file = logo_dir / f"{team_abbrev}.png"
                 if logo_file.exists():
                     with Image.open(logo_file) as img:
@@ -302,8 +299,8 @@ class GameRenderer:
         draw_overlay = ImageDraw.Draw(overlay)
         
         # Get league for logo directory
-        league = game.get('league', 'nba')
-        logo_dir = Path(self.logo_dirs.get(league, 'assets/sports/nba_logos'))
+        league = game.get('league', 'afl')
+        logo_dir = Path(self.logo_dirs.get(league, 'assets/sports/afl_logos'))
         
         # Get team info - support flat format from sports.py game dicts
         home_abbr = game.get('home_abbr', '')
@@ -377,7 +374,7 @@ class GameRenderer:
         return main_img.convert('RGB')
     
     def _draw_live_game_status(self, draw: ImageDraw.Draw, game: Dict) -> None:
-        """Draw status elements for a live basketball game."""
+        """Draw status elements for a live Australian Football game."""
         # Period and Clock (Top center) - use flat game dict format from sports.py
         period_text = game.get('period_text', '')
         clock = game.get('clock', '')
@@ -402,7 +399,7 @@ class GameRenderer:
         self._draw_text_with_outline(draw, period_clock_text, (status_x, status_y), self.fonts['time'])
     
     def _draw_recent_game_status(self, draw: ImageDraw.Draw, game: Dict) -> None:
-        """Draw status elements for a recently completed basketball game."""
+        """Draw status elements for a recently completed Australian Footballgame."""
         # Final status (Top center) - prepend round for tournament games
         status_text = game.get("period_text", "Final")
         if self._get_mm_setting(game, 'show_round') and game.get("is_tournament") and game.get("tournament_round"):
@@ -423,7 +420,7 @@ class GameRenderer:
             self._draw_text_with_outline(draw, game_date, (date_x, date_y), self.fonts['detail'])
     
     def _draw_upcoming_game_status(self, draw: ImageDraw.Draw, game: Dict) -> None:
-        """Draw status elements for an upcoming basketball game."""
+        """Draw status elements for an upcoming Australian Football game."""
         # Status text - tournament round or "Next Game"
         if self._get_mm_setting(game, 'show_round') and game.get("is_tournament") and game.get("tournament_round"):
             status_text = game["tournament_round"]
