@@ -1,4 +1,4 @@
-# Basketball Scoreboard Plugin Requirements
+# Australian Football Scoreboard Plugin Requirements
 
 # Core dependencies (handled by main LEDMatrix)
 # requests - for API calls
