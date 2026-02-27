@@ -1,12 +1,12 @@
 """
-Scroll Display Handler for Basketball Scoreboard Plugin
+Scroll Display Handler for Australian Football Scoreboard Plugin
 
 Implements high-FPS horizontal scrolling of all matching games with league separator icons.
 Uses ScrollHelper for efficient numpy-based scrolling and dynamic duration calculation.
 
 Features:
 - Pre-rendered game cards for smooth scrolling
-- League separator icons (NBA logo, WNBA logo, NCAA logos) between different leagues
+- League separator icons (AFL logo, WNBA logo, NCAA logos) between different leagues
 - Dynamic duration based on total content width
 - FPS logging and performance monitoring
 - Live priority support for scroll mode
@@ -41,7 +41,7 @@ except AttributeError:
 
 class ScrollDisplay:
     """
-    Handles scroll display mode for the basketball scoreboard plugin.
+    Handles scroll display mode for the australian football scoreboard plugin.
     
     This class:
     - Collects all games matching criteria (respecting live priority)
@@ -53,7 +53,7 @@ class ScrollDisplay:
     """
     
     # Paths to league separator icons
-    NBA_SEPARATOR_ICON = "assets/sports/nba_logos/NBA.png"
+    AFL_SEPARATOR_ICON = "assets/sports/afl_logos/AFL.png"
     WNBA_SEPARATOR_ICON = "assets/sports/wnba_logos/WNBA.png"
     NCAA_SEPARATOR_ICON = "assets/sports/ncaa_logos/NCAA.png"  # Generic NCAA logo, or use league-specific if available
     MARCH_MADNESS_SEPARATOR_ICON = "assets/sports/ncaa_logos/MARCH_MADNESS.png"
@@ -190,11 +190,11 @@ class ScrollDisplay:
             if league_scroll:
                 return {**defaults, **league_scroll}
         
-        # Fall back to NBA settings (usually first enabled)
-        nba_config = self.config.get("nba", {})
-        nba_scroll = nba_config.get("scroll_settings", {})
-        if nba_scroll:
-            return {**defaults, **nba_scroll}
+        # Fall back to AFL settings (usually first enabled)
+        afl_config = self.config.get("afl", {})
+        afl_scroll = afl_config.get("scroll_settings", {})
+        if afl_scroll:
+            return {**defaults, **afl_scroll}
         
         # Fall back to WNBA settings
         wnba_config = self.config.get("wnba", {})
@@ -257,7 +257,7 @@ class ScrollDisplay:
 
         # Load all separator icons using helper
         self._load_separator_icon(
-            self.NBA_SEPARATOR_ICON, ["nba"], separator_height, "NBA"
+            self.AFL_SEPARATOR_ICON, ["afl"], separator_height, "AFL"
         )
         self._load_separator_icon(
             self.WNBA_SEPARATOR_ICON, ["wnba"], separator_height, "WNBA"
@@ -307,7 +307,7 @@ class ScrollDisplay:
         Args:
             games: List of game dictionaries with league info
             game_type: Type hint ('live', 'recent', 'upcoming', or 'mixed' for mixed types)
-            leagues: List of leagues in order (e.g., ['nba', 'wnba', 'ncaam'])
+            leagues: List of leagues in order (e.g., ['afl', 'wnba', 'ncaam'])
             rankings_cache: Optional team rankings cache
 
         Returns:
@@ -357,7 +357,7 @@ class ScrollDisplay:
         league_counts: Dict[str, int] = {}
 
         for game in games:
-            game_league = game.get("league", "nba")  # Default to NBA if not specified
+            game_league = game.get("league", "afl")  # Default to AFL if not specified
 
             # Use March Madness separator for tournament games
             separator_key = game_league
