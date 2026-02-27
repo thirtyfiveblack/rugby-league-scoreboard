@@ -1,23 +1,13 @@
 -----------------------------------------------------------------------------------
-### Connect with ChuckBuilds
+# Australian Football Scoreboard Plugin
 
-- Show support on Youtube: https://www.youtube.com/@ChuckBuilds
-- Stay in touch on Instagram: https://www.instagram.com/ChuckBuilds/
-- Want to chat or need support? Reach out on the ChuckBuilds Discord: https://discord.com/invite/uW36dVAtcT
-- Feeling Generous? Support the project:
-  - Github Sponsorship: https://github.com/sponsors/ChuckBuilds
-  - Buy Me a Coffee: https://buymeacoffee.com/chuckbuilds
-  - Ko-fi: https://ko-fi.com/chuckbuilds/ 
+A plugin for LEDMatrix that displays live, recent, and upcoming Australian Football games across the AFL league.
 
------------------------------------------------------------------------------------
-
-# Basketball Scoreboard Plugin
-
-A plugin for LEDMatrix that displays live, recent, and upcoming basketball games across NBA, NCAA Men's Basketball, NCAA Women's Basketball, and WNBA leagues.
+Plugin has been cloned from the https://github.com/ChuckBuilds/ledmatrix-plugins/tree/main/plugins/basketball-scoreboard and I've left some artefacts from WNBA & NCAA in case ESPN extend their API to cover more AFL leagues such as VFL, NEAFL, SANFL, WAFL.
 
 ## Features
 
-- **Multiple League Support**: NBA, NCAA Men's Basketball, NCAA Women's Basketball, WNBA
+- **Single League Support**: AFL
 - **Live Game Tracking**: Real-time scores, quarters, time remaining
 - **Recent Games**: Recently completed games with final scores
 - **Upcoming Games**: Scheduled games with start times
@@ -43,9 +33,9 @@ A plugin for LEDMatrix that displays live, recent, and upcoming basketball games
 
 ```json
 {
-  "nba": {
+  "afl": {
     "enabled": true,
-    "favorite_teams": ["LAL", "BOS", "GSW"],
+    "favorite_teams": ["MELB", "RICH", "BL"],
     "display_modes": {
       "show_live": true,
       "show_recent": true,
@@ -80,8 +70,8 @@ A plugin for LEDMatrix that displays live, recent, and upcoming basketball games
 
 **Configuration Options:**
 
-- `enabled`: Enable/disable NBA games (default: true)
-- `favorite_teams`: Array of team abbreviations (e.g., ["LAL", "BOS", "GSW"])
+- `enabled`: Enable/disable AFL games (default: true)
+- `favorite_teams`: Array of team abbreviations (e.g., ["MELB", "RICH", "BL"])
 - `display_modes`: Control which game types to show
   - `show_live`: Show live games (default: true)
   - `show_recent`: Show recently completed games (default: true)
@@ -106,138 +96,14 @@ A plugin for LEDMatrix that displays live, recent, and upcoming basketball games
   - `recent`: Recent games duration (default: 15)
   - `upcoming`: Upcoming games duration (default: 15)
 
-#### NCAA Men's Basketball Configuration
-
-**Note**: Full season data is only fetched for teams in `favorite_teams`. Recent/Upcoming modes require favorite teams to be configured.
-
-```json
-{
-  "ncaam": {
-    "enabled": true,
-    "favorite_teams": ["DUKE", "UNC", "KANSAS"],
-    "display_modes": {
-      "show_live": true,
-      "show_recent": true,
-      "show_upcoming": true
-    },
-    "live_priority": true,
-    "live_game_duration": 20,
-    "live_update_interval": 30,
-    "update_interval_seconds": 3600,
-    "game_limits": {
-      "recent_games_to_show": 1,
-      "upcoming_games_to_show": 1
-    },
-    "display_options": {
-      "show_records": false,
-      "show_ranking": false,
-      "show_odds": true
-    },
-    "filtering": {
-      "show_favorite_teams_only": true,
-      "show_all_live": false
-    }
-  }
-}
-```
-
-**Configuration Options:** Same as NBA (see NBA Configuration section above for detailed descriptions).
-
-#### NCAA Women's Basketball Configuration
-
-**Note**: Full season data is only fetched for teams in `favorite_teams`. Recent/Upcoming modes require favorite teams to be configured.
-
-```json
-{
-  "ncaaw": {
-    "enabled": true,
-    "favorite_teams": ["UCONN", "SCAR", "STAN"],
-    "display_modes": {
-      "show_live": true,
-      "show_recent": true,
-      "show_upcoming": true
-    },
-    "live_priority": true,
-    "live_game_duration": 20,
-    "live_update_interval": 30,
-    "update_interval_seconds": 3600,
-    "game_limits": {
-      "recent_games_to_show": 1,
-      "upcoming_games_to_show": 1
-    },
-    "display_options": {
-      "show_records": false,
-      "show_ranking": false,
-      "show_odds": true
-    },
-    "filtering": {
-      "show_favorite_teams_only": true,
-      "show_all_live": false
-    }
-  }
-}
-```
-
-**Configuration Options:** Same as NBA (see NBA Configuration section above for detailed descriptions).
-
-#### WNBA Configuration
-
-```json
-{
-  "wnba": {
-    "enabled": true,
-    "favorite_teams": ["LVA", "NYL", "CHI"],
-    "display_modes": {
-      "show_live": true,
-      "show_recent": true,
-      "show_upcoming": true
-    },
-    "live_priority": true,
-    "live_game_duration": 20,
-    "live_update_interval": 30,
-    "update_interval_seconds": 3600,
-    "game_limits": {
-      "recent_games_to_show": 1,
-      "upcoming_games_to_show": 1
-    },
-    "display_options": {
-      "show_records": false,
-      "show_ranking": false,
-      "show_odds": true
-    },
-    "filtering": {
-      "show_favorite_teams_only": true,
-      "show_all_live": false
-    }
-  }
-}
-```
-
-**Configuration Options:** Same as NBA (see NBA Configuration section above for detailed descriptions).
-
 ## Display Modes
 
 The plugin registers granular display modes per league. Each league has three modes:
 
-### NBA Modes
-- **nba_live**: Shows currently active NBA games
-- **nba_recent**: Shows recently completed NBA games
-- **nba_upcoming**: Shows scheduled upcoming NBA games
-
-### WNBA Modes
-- **wnba_live**: Shows currently active WNBA games
-- **wnba_recent**: Shows recently completed WNBA games
-- **wnba_upcoming**: Shows scheduled upcoming WNBA games
-
-### NCAA Men's Basketball Modes
-- **ncaam_live**: Shows currently active NCAA Men's games
-- **ncaam_recent**: Shows recently completed NCAA Men's games
-- **ncaam_upcoming**: Shows scheduled upcoming NCAA Men's games
-
-### NCAA Women's Basketball Modes
-- **ncaaw_live**: Shows currently active NCAA Women's games
-- **ncaaw_recent**: Shows recently completed NCAA Women's games
-- **ncaaw_upcoming**: Shows scheduled upcoming NCAA Women's games
+### AFL Modes
+- **afl_live**: Shows currently active AFL games
+- **afl_recent**: Shows recently completed AFL games
+- **afl_upcoming**: Shows scheduled upcoming AFL games
 
 ### Live Priority Mode
 
@@ -251,17 +117,8 @@ This feature allows you to never miss live action - when a game goes live, it wi
 
 ## Team Abbreviations
 
-### NBA Teams
-Common abbreviations: LAL, BOS, GSW, MIL, PHI, DEN, MIA, BKN, ATL, CHA, NYK, IND, DET, TOR, CHI, CLE, ORL, WAS, HOU, SAS, MIN, POR, SAC, LAC, MEM, DAL, PHX, UTA, OKC, NOP
-
-### NCAA Men's Basketball Teams
-Common abbreviations: DUKE, UNC, KANSAS, KENTUCKY, UCLA, ARIZONA, GONZAGA, BAYLOR, VILLANOVA, MICHIGAN, OHIOST, FLORIDA, WISCONSIN, MARYLAND, VIRGINIA, LOUISVILLE, SYRACUSE, INDIANA, PURDUE, IOWA
-
-### NCAA Women's Basketball Teams
-Common abbreviations: UCONN, SCAR (South Carolina), STAN (Stanford), BAYLOR, LOUISVILLE, OREGON, MISSST (Mississippi State), NDAME (Notre Dame), DUKE, MARYLAND, UCLA, ARIZONA, OREGONST (Oregon State), FLORIDA, TENNESSEE, TEXAS, OKLAHOMA, IOWA
-
-### WNBA Teams
-Common abbreviations: LVA (Las Vegas Aces), NYL (New York Liberty), CHI (Chicago Sky), CONN (Connecticut Sun), DAL (Dallas Wings), ATL (Atlanta Dream), IND (Indiana Fever), MIN (Minnesota Lynx), PHX (Phoenix Mercury), SEA (Seattle Storm), WAS (Washington Mystics), LAC (Los Angeles Sparks)
+### AFL Teams
+Common abbreviations: MELB, RICH, BL
 
 ## Background Service
 
@@ -284,23 +141,13 @@ Configure in `background_service`:
 
 ## Data Source
 
-Game data is fetched from ESPN's public API endpoints for all supported basketball leagues.
+Game data is fetched from ESPN's public API endpoints for all supported Australian Footbal leagues.
 
-### NCAA Basketball Season Data
-
-**Important**: For NCAA Men's and Women's Basketball, full season data is only fetched for teams in your `favorite_teams` list:
-
-- **Live Mode**: Shows all current/live games (not limited to favorite teams)
-- **Recent/Upcoming Modes**: Only displays games from your favorite teams' full season schedules
-- **No Favorite Teams**: If no favorite teams are configured, Recent/Upcoming modes will only show games from the current scoreboard (limited data)
-
-This approach works around ESPN API limitations that prevent fetching full season schedules via date ranges for college basketball. The plugin uses team-specific schedule endpoints (`/teams/{id}/schedule`) to get complete season data for each favorite team.
-
-**NBA and WNBA**: These leagues support date range queries, so full season data is available regardless of favorite teams configuration.
+**AFL and WNBA**: These leagues support date range queries, so full season data is available regardless of favorite teams configuration.
 
 ## Dependencies
 
-This plugin requires the main LEDMatrix installation and inherits functionality from the Basketball base classes.
+This plugin requires the main LEDMatrix installation and inherits functionality from the Australian Football base classes.
 
 ## Installation
 
@@ -341,7 +188,7 @@ The `filtering` section controls which games are displayed:
 - **No games showing**: 
   - Check if leagues are enabled in configuration
   - Verify API endpoints are accessible
-  - Check if favorite teams are configured (required for NCAA recent/upcoming modes)
+  - Check if favorite teams are configured
   - Review filtering settings - may be filtering out all games
   
 - **Missing team logos**: Ensure team logo files exist in your `assets/sports/` directory
