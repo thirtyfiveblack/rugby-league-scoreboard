@@ -16,7 +16,7 @@ ESPN_NRL_SCOREBOARD_URL = (
 )
 
 
-class BaseNRLManager(AustralianFootball):
+class BaseNRLManager(RugbyLeague):
     """Base class for NRL managers with common functionality."""
 
     # Class variables for warning tracking
