@@ -74,7 +74,7 @@
             "type": "string"
           },
           "default": [],
-          "description": "List of favorite NRL team abbreviations (e.g., NEWC, MELB). Use 2-4 letter codes."
+          "description": "List of favorite NRL team abbreviations (e.g., NEW, NOR). Use 2-3 letter codes."
         },
         "display_modes": {
           "type": "object",
