@@ -182,13 +182,14 @@ class GameRenderer:
             league = game.get('league', 'nrl')
             for team_key in ['home_abbr', 'away_abbr']:
                 abbr = game.get(team_key, '')
+                id = game.get(team_id, '')
                 if abbr:
                     # Use league+abbrev as cache key to avoid cross-league collisions
                     cache_key = f"{league}:{abbr}"
                     if cache_key not in self._logo_cache:
                         logo_path = game.get(f'{team_key.replace("abbr", "logo_path")}', '')
                         if logo_path:
-                            logo = self._load_and_resize_logo(abbr, logo_path, league)
+                            logo = self._load_and_resize_logo(abbr, id, logo_path, league)
                             if logo:
                                 self._logo_cache[cache_key] = logo
         
@@ -197,14 +198,16 @@ class GameRenderer:
     def _load_and_resize_logo(
         self, 
         team_abbrev: str, 
+        team_id: str,
         logo_path: Path, 
-        league: str = 'nba'
+        league: str = 'nrl'
     ) -> Optional[Image.Image]:
         """
         Load and resize a team logo with caching.
         
         Args:
             team_abbrev: Team abbreviation (e.g., 'MELB', 'RICH')
+            team_id: Team id (eg. 289201)
             logo_path: Path to the logo file
             league: League identifier (e.g., 'nrl', 'vfl')
             
@@ -318,11 +321,13 @@ class GameRenderer:
         # Load logos (using league+abbrev for cache key)
         home_logo = self._load_and_resize_logo(
             home_abbr,
+            home_id,
             home_logo_path,
             league
         )
         away_logo = self._load_and_resize_logo(
             away_abbr,
+            away_id,
             away_logo_path,
             league
         )
