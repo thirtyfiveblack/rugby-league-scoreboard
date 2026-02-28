@@ -710,6 +710,7 @@ class SportsCore(ABC):
                     for entry in entries:
                         team_info = entry.get("team", {})
                         team_abbr = team_info.get("abbreviation", "")
+                        team_id = team_info.get("id", "")
                         
                         if team_abbr:
                             rankings[team_abbr] = rank
