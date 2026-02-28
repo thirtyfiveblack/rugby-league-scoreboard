@@ -305,7 +305,9 @@ class GameRenderer:
         
         # Get team info - support flat format from sports.py game dicts
         home_abbr = game.get('home_abbr', '')
+        home_id = game.get('home_id', '')
         away_abbr = game.get('away_abbr', '')
+        away_id = game.get('away_id', '')
 
         # Get logo paths from game data, otherwise construct from logo_dir
         #home_logo_path = game.get('home_logo_path', logo_dir / f"{home_abbr}.png")
