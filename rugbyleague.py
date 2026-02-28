@@ -13,7 +13,7 @@ class RugbyLeague(SportsCore):
     def __init__(self, config: Dict[str, Any], display_manager, cache_manager, logger: logging.Logger, sport_key: str):
         super().__init__(config, display_manager, cache_manager, logger, sport_key)
         self.data_source = ESPNDataSource(logger)
-        self.sport = "australian-football"
+        self.sport = "rugby-league"
 
     def _fetch_team_record(self, team_id: str) -> str:
         """Fetch a team's current overall record from the ESPN team endpoint."""
