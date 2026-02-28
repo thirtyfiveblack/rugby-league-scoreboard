@@ -1,13 +1,13 @@
 -----------------------------------------------------------------------------------
-# Australian Football Scoreboard Plugin
+# Rugby League Scoreboard Plugin
 
-A plugin for LEDMatrix that displays live, recent, and upcoming Australian Football games across the AFL league.
+A plugin for LEDMatrix that displays live, recent, and upcoming Rugby League games across the NRL competition.
 
 Plugin has been cloned from the https://github.com/ChuckBuilds/ledmatrix-plugins/tree/main/plugins/basketball-scoreboard and I've left some artefacts from WNBA & NCAA in case ESPN extend their API to cover more AFL leagues such as VFL, NEAFL, SANFL, WAFL.
 
 ## Features
 
-- **Single League Support**: AFL
+- **Single League Support**: NRL
 - **Live Game Tracking**: Real-time scores, quarters, time remaining
 - **Recent Games**: Recently completed games with final scores
 - **Upcoming Games**: Scheduled games with start times
@@ -29,13 +29,13 @@ Plugin has been cloned from the https://github.com/ChuckBuilds/ledmatrix-plugins
 
 ### Per-League Settings
 
-#### NBA Configuration
+#### NRL Configuration
 
 ```json
 {
-  "afl": {
+  "nrl": {
     "enabled": true,
-    "favorite_teams": ["MELB", "RICH", "BL"],
+    "favorite_teams": ["NEW", "NOR"],
     "display_modes": {
       "show_live": true,
       "show_recent": true,
@@ -70,8 +70,8 @@ Plugin has been cloned from the https://github.com/ChuckBuilds/ledmatrix-plugins
 
 **Configuration Options:**
 
-- `enabled`: Enable/disable AFL games (default: true)
-- `favorite_teams`: Array of team abbreviations (e.g., ["MELB", "RICH", "BL"])
+- `enabled`: Enable/disable NRL games (default: true)
+- `favorite_teams`: Array of team abbreviations (e.g., ["NEW", "NOR"])
 - `display_modes`: Control which game types to show
   - `show_live`: Show live games (default: true)
   - `show_recent`: Show recently completed games (default: true)
@@ -100,10 +100,10 @@ Plugin has been cloned from the https://github.com/ChuckBuilds/ledmatrix-plugins
 
 The plugin registers granular display modes per league. Each league has three modes:
 
-### AFL Modes
-- **afl_live**: Shows currently active AFL games
-- **afl_recent**: Shows recently completed AFL games
-- **afl_upcoming**: Shows scheduled upcoming AFL games
+### NRL Modes
+- **nrl_live**: Shows currently active NRL games
+- **nrl_recent**: Shows recently completed NRL games
+- **nrl_upcoming**: Shows scheduled upcoming NRL games
 
 ### Live Priority Mode
 
@@ -117,8 +117,8 @@ This feature allows you to never miss live action - when a game goes live, it wi
 
 ## Team Abbreviations
 
-### AFL Teams
-Common abbreviations: MELB, RICH, BL
+### NRL Teams
+Common abbreviations: NEW, NOR
 
 ## Background Service
 
@@ -141,9 +141,9 @@ Configure in `background_service`:
 
 ## Data Source
 
-Game data is fetched from ESPN's public API endpoints for all supported Australian Footbal leagues.
+Game data is fetched from ESPN's public API endpoints for all supported Rugby League competitions.
 
-**AFL and WNBA**: These leagues support date range queries, so full season data is available regardless of favorite teams configuration.
+**NRL and WNBA**: These leagues support date range queries, so full season data is available regardless of favorite teams configuration.
 
 ## Dependencies
 
