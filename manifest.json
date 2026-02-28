@@ -1,40 +1,40 @@
 {
-  "id": "australian-football-scoreboard",
-  "name": "Australian Football Scoreboard",
+  "id": "rugby-league-scoreboard",
+  "name": "Rugby League Scoreboard",
   "version": "1.0.0",
-  "description": "Live, recent, and upcoming Australian Football games across AFL with real-time scores and schedules.",
+  "description": "Live, recent, and upcoming Rugby League games across NRL with real-time scores and schedules.",
   "author": "thirtyfiveblack",
   "category": "sports",
   "tags": [
-    "australia",
-    "football",
-    "afl",
-    "australian football",
+    "rugby",
+    "league",
+    "nrl",
+    "rugby league",
     "sports",
     "scoreboard",
     "live-scores"
   ],
-  "repo": "https://github.com/thirtyfiveblack/australian-football-scoreboard",
+  "repo": "https://github.com/thirtyfiveblack/rugby-league-scoreboard",
   "branch": "main",
-  "plugin_path": "plugins/australian-football-scoreboard",
+  "plugin_path": "plugins/rugby-league-scoreboard",
   "versions": [
     {
-      "released": "2026-02-27",
+      "released": "2026-03-01",
       "version": "1.0.0",
       "ledmatrix_min": "2.0.0"
     }
   ],
   "stars": 0,
   "downloads": 0,
-  "last_updated": "2026-02-27",
+  "last_updated": "2026-03-01",
   "verified": true,
   "screenshot": "",
   "display_modes": [
-    "afl_recent",
-    "afl_upcoming",
-    "afl_live"
+    "nrl_recent",
+    "nrl_upcoming",
+    "nrl_live"
   ],
   "dependencies": {},
   "entry_point": "manager.py",
-  "class_name": "AustralianFootballScoreboardPlugin"
+  "class_name": "RugbyLeagueScoreboardPlugin"
 }
