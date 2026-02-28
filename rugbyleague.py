@@ -7,7 +7,7 @@ import time
 from sports import SportsCore, SportsLive
 from data_sources import ESPNDataSource
 
-class AustralianFootball(SportsCore):
+class RugbyLeague(SportsCore):
     """Base class for australian football sports with common functionality."""
 
     def __init__(self, config: Dict[str, Any], display_manager, cache_manager, logger: logging.Logger, sport_key: str):
@@ -109,7 +109,7 @@ class AustralianFootball(SportsCore):
             self.logger.error(f"Error extracting game details: {e} from event: {game_event.get('id')}", exc_info=True)
             return None
 
-class AustralianFootballLive(AustralianFootball, SportsLive):
+class RugbyLeagueLive(RugbyLeague, SportsLive):
     def __init__(self, config: Dict[str, Any], display_manager, cache_manager, logger: logging.Logger, sport_key: str):
         super().__init__(config, display_manager, cache_manager, logger, sport_key)
 
@@ -135,7 +135,7 @@ class AustralianFootballLive(AustralianFootball, SportsLive):
                                 self.current_game["period_text"] = "Q3"
                             elif self.current_game["period"] == 4:
                                 self.current_game["period_text"] = "Q4"
-                            # Reset clock for next quarter (20:00 for AFL)
+                            # Reset clock for next quarter (20:00 for NRL)
                             minutes, seconds = 20, 0
                         else:
                             # Simulate overtime
