@@ -239,7 +239,8 @@ class GameRenderer:
             else:
                 # Try to load from league-specific logo directory
                 logo_dir = Path(self.logo_dirs.get(league, 'assets/sports/nrl_logos'))
-                logo_file = logo_dir / f"{team_abbrev}.png"
+                #logo_file = logo_dir / f"{team_abbrev}.png"
+                logo_file = logo_dir / f"{team_id}.png"
                 if logo_file.exists():
                     with Image.open(logo_file) as img:
                         if img.mode != "RGBA":
@@ -307,8 +308,10 @@ class GameRenderer:
         away_abbr = game.get('away_abbr', '')
 
         # Get logo paths from game data, otherwise construct from logo_dir
-        home_logo_path = game.get('home_logo_path', logo_dir / f"{home_abbr}.png")
-        away_logo_path = game.get('away_logo_path', logo_dir / f"{away_abbr}.png")
+        #home_logo_path = game.get('home_logo_path', logo_dir / f"{home_abbr}.png")
+        home_logo_path = game.get('home_logo_path', logo_dir / f"{home_id}.png")
+        #away_logo_path = game.get('away_logo_path', logo_dir / f"{away_abbr}.png")
+        away_logo_path = game.get('away_logo_path', logo_dir / f"{away_id}.png")
         
         # Load logos (using league+abbrev for cache key)
         home_logo = self._load_and_resize_logo(
