@@ -132,9 +132,7 @@ class AustralianFootballHelpers:
             details['is_final'] = status_state == 'post'
             details['is_upcoming'] = status_state == 'pre'
             details['is_halftime'] = status_state == 'halftime'
-            
-            self.logger.info(f"Extract: {home_name} vs. {away_name}. Status {status_state}")
-            
+                        
             # Format period/quarter for basketball
             period = status.get('period', 0)
             period_text = ""
