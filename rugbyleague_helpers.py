@@ -1,10 +1,10 @@
 """
-Australian Football Helper Functions
+Rugby League Helper Functions
 
-Contains all the helper methods needed for Australian Football scoreboard rendering,
+Contains all the helper methods needed for Rugby League scoreboard rendering,
 logo loading, text drawing, and game data extraction.
 
-Extracted from Australian Football and Sports base classes for plugin independence.
+Extracted from Rugby League and Sports base classes for plugin independence.
 """
 
 import os
@@ -14,8 +14,8 @@ from typing import Dict, Any, Optional
 from PIL import Image, ImageDraw, ImageFont
 
 
-class AustralianFootballHelpers:
-    """Helper class for Australian Football-specific rendering and data processing."""
+class RugbyLeagueHelpers:
+    """Helper class for Rugby League-specific rendering and data processing."""
     
     def __init__(self, logger: logging.Logger, display_width: int, display_height: int):
         self.logger = logger
