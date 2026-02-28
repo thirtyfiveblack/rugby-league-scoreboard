@@ -1171,9 +1171,11 @@ class SportsCore(ABC):
                 #now = datetime.now(tz)
                 now = datetime.now()
                 yesterday = now - timedelta(days=1)
+                tomorrow = now + timedelta(days=1)
                 formatted_date = now.strftime("%Y%m%d")
                 formatted_date_yesterday = yesterday.strftime("%Y%m%d")
-                params = {"dates": f"{formatted_date_yesterday}-{formatted_date}", "limit": 1000}
+                formatted_date_tomorrow = tomorrow.strftime("%Y%m%d")
+                params = {"dates": f"{formatted_date_yesterday}-{formatted_date_tomorrow}", "limit": 1000}
                 self.logger.debug(f"Fetching today's games for {self.sport}/{self.league} on dates {formatted_date_yesterday}-{formatted_date}")
             
             response = self.session.get(
