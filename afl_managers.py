@@ -62,7 +62,7 @@ class BaseAFLManager(AustralianFootball):
         #if now.month < 10:
             #season_year = now.year - 1
         season_year = now.year
-        datestring = f"{season_year}1001-{season_year+1}0630"
+        datestring = f"{season_year}0201-{season_year+1}1031"
         cache_key = f"{self.sport_key}_schedule_{season_year}"
 
         # Check cache first
