@@ -533,7 +533,7 @@ class SportsCore(ABC):
                 # Map sport_key to league identifier expected by main downloader
                 # Main downloader uses different keys than plugin sport_key
                 league_map = {
-                    'afl': 'afl',
+                    'nrl': 'nrl',
                     'wnba': 'wnba',
                     'ncaam': 'ncaam_basketball',  # Main downloader uses 'ncaam_basketball'
                     'ncaaw': 'ncaam_basketball',  # Use same endpoint as men's (no separate endpoint)
@@ -696,10 +696,10 @@ class SportsCore(ABC):
 
             rankings = {}
             
-            # Check if this is standings data (professional leagues like AFL, WNBA)
+            # Check if this is standings data (professional leagues like NRL, WNBA)
             # Standings structure: data['children'] -> child['standings']['entries'] -> entry['team']
             if "children" in data:
-                # This is standings data (AFL, WNBA, etc.)
+                # This is standings data (NRL, WNBA, etc.)
                 # Extract teams from all conferences/divisions
                 rank = 1
                 for child in data.get("children", []):
