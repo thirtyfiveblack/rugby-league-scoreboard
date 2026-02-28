@@ -115,7 +115,7 @@ class BaseNRLManager(RugbyLeague):
 
             # Submit background fetch request
             request_id = self.background_service.submit_fetch_request(
-                sport="australian-football",
+                sport="rugby-league",
                 year=season_year,
                 url=ESPN_NRL_SCOREBOARD_URL,
                 cache_key=cache_key,
