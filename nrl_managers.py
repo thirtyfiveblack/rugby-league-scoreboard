@@ -49,7 +49,7 @@ class BaseNRLManager(RugbyLeague):
         self.logger.info(
             f"Display modes - Recent: {self.recent_enabled}, Upcoming: {self.upcoming_enabled}, Live: {self.live_enabled}"
         )
-        self.league = "nrl"
+        self.league = "3"
 
     def _fetch_nrl_api_data(self, use_cache: bool = True) -> Optional[Dict]:
         """
