@@ -168,7 +168,7 @@ class BaseNRLManager(RugbyLeague):
             return self._fetch_nrl_api_data(use_cache=True)
 
 
-class NRLLiveManager(BaseNRLManager, AustralianFootballLive):
+class NRLLiveManager(BaseNRLManager, RugbyLeagueLive):
     """Manager for live NRL games."""
 
     def __init__(self, config: Dict[str, Any], display_manager, cache_manager):
