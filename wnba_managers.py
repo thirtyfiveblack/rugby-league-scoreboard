@@ -8,7 +8,7 @@ import pytz
 import requests
 
 #from basketball import Basketball, BasketballLive
-from australianfootball import AustralianFootball, AustralianFootballLive
+from rugbyleague import RugbyLeague, RugbyLeagueLive
 from sports import SportsRecent, SportsUpcoming
 
 # Constants
@@ -156,7 +156,7 @@ class BaseWNBAManager(AustralianFootball):
             return self._fetch_wnba_api_data(use_cache=True)
 
 
-class WNBALiveManager(BaseWNBAManager, AustralianFootballLive):
+class WNBALiveManager(BaseWNBAManager, RugbyLeagueLive):
     """Manager for live WNBA games."""
 
     def __init__(self, config: Dict[str, Any], display_manager, cache_manager):
