@@ -1,12 +1,12 @@
 """
-Scroll Display Handler for Australian Football Scoreboard Plugin
+Scroll Display Handler for Rugby League Scoreboard Plugin
 
 Implements high-FPS horizontal scrolling of all matching games with league separator icons.
 Uses ScrollHelper for efficient numpy-based scrolling and dynamic duration calculation.
 
 Features:
 - Pre-rendered game cards for smooth scrolling
-- League separator icons (AFL logo, WNBA logo, NCAA logos) between different leagues
+- League separator icons (NRL logo, WNBA logo, NCAA logos) between different leagues
 - Dynamic duration based on total content width
 - FPS logging and performance monitoring
 - Live priority support for scroll mode
@@ -53,7 +53,7 @@ class ScrollDisplay:
     """
     
     # Paths to league separator icons
-    AFL_SEPARATOR_ICON = "plugin-repos/australian-football-scoreboard/logos/AFL.png" #"assets/sports/afl_logos/AFL.png"
+    NRL_SEPARATOR_ICON = "plugin-repos/rugby-league-scoreboard/logos/NRL.png" #"assets/sports/nrl_logos/NRL.png"
     WNBA_SEPARATOR_ICON = "assets/sports/wnba_logos/WNBA.png"
     NCAA_SEPARATOR_ICON = "assets/sports/ncaa_logos/NCAA.png"  # Generic NCAA logo, or use league-specific if available
     MARCH_MADNESS_SEPARATOR_ICON = "assets/sports/ncaa_logos/MARCH_MADNESS.png"
@@ -190,11 +190,11 @@ class ScrollDisplay:
             if league_scroll:
                 return {**defaults, **league_scroll}
         
-        # Fall back to AFL settings (usually first enabled)
-        afl_config = self.config.get("afl", {})
-        afl_scroll = afl_config.get("scroll_settings", {})
-        if afl_scroll:
-            return {**defaults, **afl_scroll}
+        # Fall back to NRL settings (usually first enabled)
+        nrl_config = self.config.get("nrl", {})
+        nrl_scroll = nrl_config.get("scroll_settings", {})
+        if nrl_scroll:
+            return {**defaults, **nrl_scroll}
         
         # Fall back to WNBA settings
         wnba_config = self.config.get("wnba", {})
@@ -257,7 +257,7 @@ class ScrollDisplay:
 
         # Load all separator icons using helper
         self._load_separator_icon(
-            self.AFL_SEPARATOR_ICON, ["afl"], separator_height, "AFL"
+            self.NRL_SEPARATOR_ICON, ["nrl"], separator_height, "NRL"
         )
         self._load_separator_icon(
             self.WNBA_SEPARATOR_ICON, ["wnba"], separator_height, "WNBA"
@@ -307,7 +307,7 @@ class ScrollDisplay:
         Args:
             games: List of game dictionaries with league info
             game_type: Type hint ('live', 'recent', 'upcoming', or 'mixed' for mixed types)
-            leagues: List of leagues in order (e.g., ['afl', 'wnba', 'ncaam'])
+            leagues: List of leagues in order (e.g., ['nrl', 'wnba', 'ncaam'])
             rankings_cache: Optional team rankings cache
 
         Returns:
@@ -357,7 +357,7 @@ class ScrollDisplay:
         league_counts: Dict[str, int] = {}
 
         for game in games:
-            game_league = game.get("league", "afl")  # Default to AFL if not specified
+            game_league = game.get("league", "nrl")  # Default to NRL if not specified
 
             # Use March Madness separator for tournament games
             separator_key = game_league
