@@ -1,13 +1,13 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "Australian Football Scoreboard Plugin Configuration",
-  "description": "Configuration schema for the Australian Football Scoreboard plugin - displays live, recent, and upcoming AFL games",
+  "title": "Rugby League Scoreboard Plugin Configuration",
+  "description": "Configuration schema for the Rugby League Scoreboard plugin - displays live, recent, and upcoming NRL games",
   "type": "object",
   "properties": {
     "enabled": {
       "type": "boolean",
       "default": true,
-      "description": "Enable or disable the Australian Football scoreboard plugin"
+      "description": "Enable or disable the Rugby League scoreboard plugin"
     },
     "display_duration": {
       "type": "number",
@@ -58,15 +58,15 @@
         }
       }
     },
-    "afl": {
+    "nrl": {
       "type": "object",
-      "title": "AFL Settings",
-      "description": "Configuration for AFL games",
+      "title": "NRL Settings",
+      "description": "Configuration for NRL games",
       "properties": {
         "enabled": {
           "type": "boolean",
           "default": true,
-          "description": "Enable AFL games"
+          "description": "Enable NRL games"
         },
         "favorite_teams": {
           "type": "array",
@@ -74,7 +74,7 @@
             "type": "string"
           },
           "default": [],
-          "description": "List of favorite AFL team abbreviations (e.g., MELB, RICH, CARL). Use 2-4 letter codes."
+          "description": "List of favorite NRL team abbreviations (e.g., NEWC, MELB). Use 2-4 letter codes."
         },
         "display_modes": {
           "type": "object",
@@ -84,17 +84,17 @@
             "show_live": {
               "type": "boolean",
               "default": true,
-              "description": "Show live AFL games"
+              "description": "Show live NRL games"
             },
             "show_recent": {
               "type": "boolean",
               "default": true,
-              "description": "Show recently completed AFL games"
+              "description": "Show recently completed NRL games"
             },
             "show_upcoming": {
               "type": "boolean",
               "default": true,
-              "description": "Show upcoming AFL games"
+              "description": "Show upcoming NRL games"
             },
             "live_display_mode": {
               "type": "string",
@@ -256,51 +256,51 @@
               "default": 15,
               "minimum": 1,
               "maximum": 120,
-              "description": "Base display duration for AFL games"
+              "description": "Base display duration for NRL games"
             },
             "live": {
               "type": "number",
               "default": 20,
               "minimum": 1,
               "maximum": 120,
-              "description": "Display duration for live AFL games"
+              "description": "Display duration for live NRL games"
             },
             "recent": {
               "type": "number",
               "default": 15,
               "minimum": 1,
               "maximum": 120,
-              "description": "Display duration for recent AFL games"
+              "description": "Display duration for recent NRL games"
             },
             "upcoming": {
               "type": "number",
               "default": 15,
               "minimum": 1,
               "maximum": 120,
-              "description": "Display duration for upcoming AFL games"
+              "description": "Display duration for upcoming NRL games"
             }
           }
         },
         "dynamic_duration": {
           "type": "object",
-          "title": "AFL Dynamic Duration Settings",
-          "description": "Configure dynamic duration settings for AFL games.",
+          "title": "NRL Dynamic Duration Settings",
+          "description": "Configure dynamic duration settings for NRL games.",
           "properties": {
             "enabled": {
               "type": "boolean",
               "default": false,
-              "description": "Enable dynamic duration for AFL games"
+              "description": "Enable dynamic duration for NRL games"
             },
             "max_duration_seconds": {
               "type": "number",
               "minimum": 60,
               "maximum": 600,
-                  "description": "Max duration for AFL games"
+                  "description": "Max duration for NRL games"
             },
             "modes": {
               "type": "object",
-              "title": "Per-Mode Settings for AFL",
-              "description": "Configure dynamic duration for specific AFL modes",
+              "title": "Per-Mode Settings for NRL",
+              "description": "Configure dynamic duration for specific NRL modes",
               "properties": {
                 "live": {
                   "type": "object",
@@ -308,13 +308,13 @@
                     "enabled": {
                       "type": "boolean",
                       "default": false,
-                      "description": "Enable dynamic duration for AFL live games"
+                      "description": "Enable dynamic duration for NRL live games"
                     },
                     "max_duration_seconds": {
                       "type": "number",
                       "minimum": 60,
                       "maximum": 600,
-                      "description": "Max duration for AFL live games"
+                      "description": "Max duration for NRL live games"
                     }
                   }
                 },
@@ -324,13 +324,13 @@
                     "enabled": {
                       "type": "boolean",
                       "default": false,
-                      "description": "Enable dynamic duration for AFL recent games"
+                      "description": "Enable dynamic duration for NRL recent games"
                     },
                     "max_duration_seconds": {
                       "type": "number",
                       "minimum": 60,
                       "maximum": 600,
-                      "description": "Max duration for AFL recent games"
+                      "description": "Max duration for NRL recent games"
                     }
                   }
                 },
@@ -340,13 +340,13 @@
                     "enabled": {
                       "type": "boolean",
                       "default": false,
-                      "description": "Enable dynamic duration for AFL upcoming games"
+                      "description": "Enable dynamic duration for NRL upcoming games"
                     },
                     "max_duration_seconds": {
                       "type": "number",
                       "minimum": 60,
                       "maximum": 600,
-                      "description": "Max duration for AFL upcoming games"
+                      "description": "Max duration for NRL upcoming games"
                     }
                   }
                 }
@@ -357,7 +357,7 @@
         "mode_durations": {
           "type": "object",
           "title": "Mode-Level Durations",
-          "description": "Control total duration for each mode type for AFL. If not set, uses dynamic calculation (total_games × per_game_duration).",
+          "description": "Control total duration for each mode type for NRL. If not set, uses dynamic calculation (total_games × per_game_duration).",
           "properties": {
             "recent_mode_duration": {
               "type": ["number", "null"],
@@ -708,7 +708,7 @@
     "display_duration",
     "update_interval",
     "game_display_duration",
-    "afl",
+    "nrl",
     "customization"
   ]
 }
