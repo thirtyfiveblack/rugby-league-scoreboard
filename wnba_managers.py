@@ -17,7 +17,7 @@ ESPN_WNBA_SCOREBOARD_URL = (
 )
 
 
-class BaseWNBAManager(AustralianFootball):
+class BaseWNBAManager(RugbyLeague):
     """Base class for WNBA managers with common functionality."""
 
     # Class variables for warning tracking
