@@ -17,7 +17,7 @@ ESPN_NCAAWB_SCOREBOARD_URL = (
 )
 
 
-class BaseNCAAWBasketballManager(AustralianFootball):
+class BaseNCAAWBasketballManager(RugbyLeague):
     """Base class for NCAA Women's Basketball managers with common functionality."""
 
     # Class variables for warning tracking
