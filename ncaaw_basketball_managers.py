@@ -8,7 +8,7 @@ from typing import Any, Dict, Optional
 import pytz
 
 #from basketball import Basketball, BasketballLive
-from australianfootball import AustralianFootball, AustralianFootballLive
+from rugbyleague import RugbyLeague, RugbyLeagueLive
 from sports import SportsRecent, SportsUpcoming
 
 # Constants
@@ -271,7 +271,7 @@ class BaseNCAAWBasketballManager(AustralianFootball):
             return data
 
 
-class NCAAWBasketballLiveManager(BaseNCAAWBasketballManager, AustralianFootballLive):
+class NCAAWBasketballLiveManager(BaseNCAAWBasketballManager, RugbyLeagueLive):
     """Manager for live NCAA Women's Basketball games."""
 
     def __init__(self, config: Dict[str, Any], display_manager, cache_manager):
