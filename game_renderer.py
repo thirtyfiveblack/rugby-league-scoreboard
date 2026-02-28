@@ -1,5 +1,5 @@
 """
-Game Renderer for Australian Football Scoreboard Plugin
+Game Renderer for Rugby League Scoreboard Plugin
 
 Extracts game rendering logic into a reusable component for scroll display mode.
 Returns PIL Images instead of updating display directly.
@@ -60,8 +60,7 @@ class GameRenderer:
         
         # Get logo directories from config
         self.logo_dirs = {
-            #'afl': config.get('afl', {}).get('logo_dir', 'assets/sports/afl_logos'),
-            'afl': config.get('afl', {}).get('logo_dir', 'plugin-repos/australian-football-scoreboard/logos'),
+            'nrl': config.get('nrl', {}).get('logo_dir', 'plugin-repos/rugby-league-scoreboard/logos'),
         }
         
         # Display options - check per-league display_options in config
@@ -71,7 +70,7 @@ class GameRenderer:
         self.show_ranking = False
         # Per-league March Madness settings (ncaam/ncaaw can differ)
         self._march_madness_by_league: Dict[str, Dict[str, bool]] = {}
-        for league_key in ('afl', 'vfl'):
+        for league_key in ('nrl', 'vfl'):
             league_config = config.get(league_key, {})
             if league_config.get('enabled', False):
                 display_options = league_config.get('display_options', {})
@@ -180,7 +179,7 @@ class GameRenderer:
             logo_dir: Path to logo directory
         """
         for game in games:
-            league = game.get('league', 'afl')
+            league = game.get('league', 'nrl')
             for team_key in ['home_abbr', 'away_abbr']:
                 abbr = game.get(team_key, '')
                 if abbr:
@@ -207,7 +206,7 @@ class GameRenderer:
         Args:
             team_abbrev: Team abbreviation (e.g., 'MELB', 'RICH')
             logo_path: Path to the logo file
-            league: League identifier (e.g., 'afl', 'vfl')
+            league: League identifier (e.g., 'nrl', 'vfl')
             
         Returns:
             PIL Image of the logo, or None if loading failed
@@ -239,7 +238,7 @@ class GameRenderer:
                 return logo
             else:
                 # Try to load from league-specific logo directory
-                logo_dir = Path(self.logo_dirs.get(league, 'assets/sports/afl_logos'))
+                logo_dir = Path(self.logo_dirs.get(league, 'assets/sports/nrl_logos'))
                 logo_file = logo_dir / f"{team_abbrev}.png"
                 if logo_file.exists():
                     with Image.open(logo_file) as img:
@@ -300,8 +299,8 @@ class GameRenderer:
         draw_overlay = ImageDraw.Draw(overlay)
         
         # Get league for logo directory
-        league = game.get('league', 'afl')
-        logo_dir = Path(self.logo_dirs.get(league, 'assets/sports/afl_logos'))
+        league = game.get('league', 'nrl')
+        logo_dir = Path(self.logo_dirs.get(league, 'assets/sports/nrl_logos'))
         
         # Get team info - support flat format from sports.py game dicts
         home_abbr = game.get('home_abbr', '')
