@@ -77,17 +77,22 @@ class RugbyLeague(SportsCore):
             if status_state == "in":
                 if period == 0:
                     period_text = "Start"
+                elif period == 1:
+                    period_text = "First Half"
+                elif period == 2:
+                    period_text = "Second Half"
                 elif 1 <= period <= 4:
                     period_text = f"Q{period}"
                 else:
-                    period_text = f"OT{period - 4}"
+                    #period_text = f"OT{period - 4}"
+                    period_text = f"Golden Point"
             elif status_state == "halftime" or status["type"]["name"] == "STATUS_HALFTIME":
-                period_text = "HALF"
+                period_text = "Half Time"
             elif status_state == "post":
                 if period > 4:
                     period_text = "Final/OT"
                 else:
-                    period_text = "Final"
+                    period_text = "Final Score"
             elif status_state == "pre":
                 period_text = details.get("game_time", "")
 
