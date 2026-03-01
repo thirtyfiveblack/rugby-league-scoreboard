@@ -128,15 +128,15 @@ class RugbyLeagueLive(RugbyLeague, SportsLive):
                             self.current_game["period"] += 1
                             # Update period_text
                             if self.current_game["period"] == 1:
-                                self.current_game["period_text"] = "Q1"
+                                self.current_game["period_text"] = "First Half"
                             elif self.current_game["period"] == 2:
-                                self.current_game["period_text"] = "Q2"
+                                self.current_game["period_text"] = "Second Half"
                             elif self.current_game["period"] == 3:
                                 self.current_game["period_text"] = "Q3"
                             elif self.current_game["period"] == 4:
                                 self.current_game["period_text"] = "Q4"
-                            # Reset clock for next quarter (20:00 for NRL)
-                            minutes, seconds = 20, 0
+                            # Reset clock for next quarter (40:00 for NRL)
+                            minutes, seconds = 40, 0
                         else:
                             # Simulate overtime
                             self.current_game["period"] += 1
