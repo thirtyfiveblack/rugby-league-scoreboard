@@ -215,7 +215,7 @@ class GameRenderer:
             PIL Image of the logo, or None if loading failed
         """
         # Use league+abbrev as cache key to avoid cross-league collisions
-        cache_key = f"{league}:{team_abbrev}"
+        cache_key = f"{league}:{team_abbrev}"{team_id}"
         if cache_key in self._logo_cache:
             return self._logo_cache[cache_key]
         
