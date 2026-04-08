@@ -41,7 +41,7 @@ except AttributeError:
 
 class ScrollDisplay:
     """
-    Handles scroll display mode for the australian football scoreboard plugin.
+    Handles scroll display mode for the rugby league scoreboard plugin.
     
     This class:
     - Collects all games matching criteria (respecting live priority)
@@ -429,10 +429,10 @@ class ScrollDisplay:
         # Log what we loaded
         league_summary = ", ".join([f"{league.upper()}({count})" for league, count in league_counts.items()])
         self.logger.info(
-            f"[Australian Football Scroll] Prepared {game_count} games for scrolling: {league_summary}"
+            f"[Rugby League Scroll] Prepared {game_count} games for scrolling: {league_summary}"
         )
         self.logger.info(
-            f"[Australian Football Scroll] Total scroll width: {self.scroll_helper.total_scroll_width}px, "
+            f"[Rugby League Scroll] Total scroll width: {self.scroll_helper.total_scroll_width}px, "
             f"Dynamic duration: {self.scroll_helper.calculated_duration}s"
         )
         
@@ -493,7 +493,7 @@ class ScrollDisplay:
                 scroll_info = self.scroll_helper.get_scroll_info()
                 
                 self.logger.info(
-                    f"[Australian Football Scroll] FPS: {fps:.1f}, "
+                    f"[Rugby League Scroll] FPS: {fps:.1f}, "
                     f"Position: {scroll_info['scroll_position']:.0f}/{scroll_info['total_width']}px, "
                     f"Elapsed: {scroll_info.get('elapsed_time', 0):.1f}s/{scroll_info['dynamic_duration']}s"
                 )
@@ -554,7 +554,7 @@ class ScrollDisplayManager:
     """
     Manages scroll display instances for different game types.
     
-    This class provides a higher-level interface for the Australian Football plugin
+    This class provides a higher-level interface for the Rugby League plugin
     to manage scroll displays for live, recent, and upcoming games.
     """
     
