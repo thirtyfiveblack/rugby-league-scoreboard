@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Simple syntax checker for the Australian Football plugin.
+Simple syntax checker for the rugby league plugin.
 Tests that the plugin can be imported without errors.
 """
 
@@ -15,10 +15,10 @@ sys.path.insert(0, '/home/chuck/Github/LEDMatrix')
 
 try:
     # Try to import the plugin
-    from manager import AustralianFootballPluginManager
+    from manager import RugbyLeaguePluginManager
     print("✓ Plugin imported successfully")
-    print(f"✓ Class name: {AustralianFootballPluginManager.__name__}")
-    print(f"✓ Base classes: {AustralianFootballPluginManager.__bases__}")
+    print(f"✓ Class name: {RugbyLeaguePluginManager.__name__}")
+    print(f"✓ Base classes: {RugbyLeaguePluginManager.__bases__}")
     print("\nPlugin structure is valid!")
     sys.exit(0)
     
