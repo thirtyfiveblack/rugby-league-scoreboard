@@ -384,7 +384,7 @@ class GameRenderer:
         return main_img.convert('RGB')
     
     def _draw_live_game_status(self, draw: ImageDraw.Draw, game: Dict) -> None:
-        """Draw status elements for a live Australian Football game."""
+        """Draw status elements for a live rugby league game."""
         # Period and Clock (Top center) - use flat game dict format from sports.py
         period_text = game.get('period_text', '')
         clock = game.get('clock', '')
@@ -409,7 +409,7 @@ class GameRenderer:
         self._draw_text_with_outline(draw, period_clock_text, (status_x, status_y), self.fonts['time'])
     
     def _draw_recent_game_status(self, draw: ImageDraw.Draw, game: Dict) -> None:
-        """Draw status elements for a recently completed Australian Footballgame."""
+        """Draw status elements for a recently completed rugby league game."""
         # Final status (Top center) - prepend round for tournament games
         status_text = game.get("period_text", "Final Score")
         if self._get_mm_setting(game, 'show_round') and game.get("is_tournament") and game.get("tournament_round"):
@@ -430,7 +430,7 @@ class GameRenderer:
             self._draw_text_with_outline(draw, game_date, (date_x, date_y), self.fonts['detail'])
     
     def _draw_upcoming_game_status(self, draw: ImageDraw.Draw, game: Dict) -> None:
-        """Draw status elements for an upcoming Australian Football game."""
+        """Draw status elements for an upcoming rugby league game."""
         # Status text - tournament round or "Next Game"
         if self._get_mm_setting(game, 'show_round') and game.get("is_tournament") and game.get("tournament_round"):
             status_text = game["tournament_round"]
