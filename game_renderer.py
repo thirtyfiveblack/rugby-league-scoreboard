@@ -559,7 +559,7 @@ class GameRenderer:
             away_text = self._get_team_display_text(away_abbr, away_record, game, "away")
             if away_text:
                 away_record_bbox = draw.textbbox((0, 0), away_text, font=record_font)
-                away_record_width = home_record_bbox[2] - away_record_bbox[0]
+                away_record_width = away_record_bbox[2] - away_record_bbox[0]
                 away_record_x = self.display_width - away_record_width - 3
                 self._draw_text_with_outline(draw, away_text, (away_record_x, record_y), record_font)
 
