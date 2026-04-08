@@ -53,19 +53,21 @@ class RugbyLeagueHelpers:
             draw.text((x + dx, y + dy), text, font=font, fill=outline_color)
         draw.text((x, y), text, font=font, fill=fill)
     
-    def load_and_resize_logo(self, team_abbrev: str, logo_path: Path) -> Optional[Image.Image]:
+    def load_and_resize_logo(self, team_abbrev: str, team_id: str, logo_path: Path) -> Optional[Image.Image]:
         """Load and resize a team logo, with caching."""
-        self.logger.debug(f"Loading logo for {team_abbrev} from {logo_path}")
+        self.logger.debug(f"Loading logo for {team_abbrev} ({team_id}) from {logo_path}")
         
         # Check cache first
-        if team_abbrev in self._logo_cache:
-            self.logger.debug(f"Using cached logo for {team_abbrev}")
-            return self._logo_cache[team_abbrev]
+        cache_key = f"{team_abbrev}:{team_id}"
+        #if team_abbrev in self._logo_cache:
+        if cache_key in self._logo_cache:
+            self.logger.debug(f"Using cached logo for {team_abbrev} ({team_id})")
+            return self._logo_cache[cache_key]
         
         try:
             # Check if file exists
             if not logo_path.exists():
-                self.logger.warning(f"Logo not found for {team_abbrev} at {logo_path}")
+                self.logger.warning(f"Logo not found for {team_abbrev} ({team_id}) at {logo_path}")
                 return None
             
             # Load and convert to RGBA
@@ -79,7 +81,7 @@ class RugbyLeagueHelpers:
             logo.thumbnail((max_width, max_height), Image.Resampling.LANCZOS)
             
             # Cache the logo
-            self._logo_cache[team_abbrev] = logo
+            self._logo_cache[cache_key] = logo
             return logo
             
         except Exception as e:
