@@ -350,7 +350,7 @@ class GameRenderer:
         logo_slot = min(self.display_height, self.display_width // 2)
         home_x = (logo_slot - home_logo.width) // 2
         home_y = center_y - (home_logo.height // 2)
-        main_img.paste(home_logo, (home_x, home_y), away_logo)
+        main_img.paste(home_logo, (home_x, home_y), home_logo)
 
         away_slot_start = self.display_width - logo_slot
         away_x = away_slot_start + (logo_slot - away_logo.width) // 2
