@@ -8,7 +8,7 @@ from sports import SportsCore, SportsLive
 from data_sources import ESPNDataSource
 
 class RugbyLeague(SportsCore):
-    """Base class for australian football sports with common functionality."""
+    """Base class for rugby league sports with common functionality."""
 
     def __init__(self, config: Dict[str, Any], display_manager, cache_manager, logger: logging.Logger, sport_key: str):
         super().__init__(config, display_manager, cache_manager, logger, sport_key)
@@ -64,7 +64,7 @@ class RugbyLeague(SportsCore):
                                 comp["record"] = [{"displayValue": opp_record, "type": "total"}]
 
     def _extract_game_details(self, game_event: Dict) -> Optional[Dict]:
-        """Extract relevant game details from ESPN Australian Football API response."""
+        """Extract relevant game details from ESPN rugby league API response."""
         details, home_team, away_team, status, situation = self._extract_game_details_common(game_event)
         if details is None or home_team is None or away_team is None or status is None:
             return
