@@ -183,9 +183,9 @@ class GameRenderer:
             for team_key in ['home_abbr', 'away_abbr']:
                 abbr = game.get(team_key, '')
                 id = game.get(team_id, '')
-                if abbr:
+                if id:
                     # Use league+teamid+abbrev as cache key to avoid cross-league collisions
-                    cache_key = f"{league}:{id}:{abbr}"
+                    cache_key = f"{league}:{abbr}:{id}"
                     if cache_key not in self._logo_cache:
                         logo_path = game.get(f'{team_key.replace("abbr", "logo_path")}', '')
                         if logo_path:
