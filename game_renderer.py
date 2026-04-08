@@ -184,8 +184,8 @@ class GameRenderer:
                 abbr = game.get(team_key, '')
                 id = game.get(team_id, '')
                 if abbr:
-                    # Use league+abbrev as cache key to avoid cross-league collisions
-                    cache_key = f"{league}:{abbr}"
+                    # Use league+teamid+abbrev as cache key to avoid cross-league collisions
+                    cache_key = f"{league}:{id}:{abbr}"
                     if cache_key not in self._logo_cache:
                         logo_path = game.get(f'{team_key.replace("abbr", "logo_path")}', '')
                         if logo_path:
@@ -348,19 +348,19 @@ class GameRenderer:
         # Draw logos — each centered within a slot on its side; cap at half the card
         # width so home_slot_start stays non-negative on square/tall displays
         logo_slot = min(self.display_height, self.display_width // 2)
-        away_x = (logo_slot - away_logo.width) // 2
+        home_x = (logo_slot - home_logo.width) // 2
+        home_y = center_y - (home_logo.height // 2)
+        main_img.paste(home_logo, (home_x, home_y), away_logo)
+
+        away_slot_start = self.display_width - logo_slot
+        away_x = away_slot_start + (logo_slot - away_logo.width) // 2
         away_y = center_y - (away_logo.height // 2)
         main_img.paste(away_logo, (away_x, away_y), away_logo)
-
-        home_slot_start = self.display_width - logo_slot
-        home_x = home_slot_start + (logo_slot - home_logo.width) // 2
-        home_y = center_y - (home_logo.height // 2)
-        main_img.paste(home_logo, (home_x, home_y), home_logo)
         
         # Draw scores (centered)
         home_score = str(game.get("home_score", "0"))
         away_score = str(game.get("away_score", "0"))
-        score_text = f"{away_score}-{home_score}"
+        score_text = f"{home_score}-{away_score}"
         score_width = draw_overlay.textlength(score_text, font=self.fonts['score'])
         score_x = (self.display_width - score_width) // 2
         score_y = (self.display_height // 2) - 3
@@ -411,7 +411,7 @@ class GameRenderer:
     def _draw_recent_game_status(self, draw: ImageDraw.Draw, game: Dict) -> None:
         """Draw status elements for a recently completed Australian Footballgame."""
         # Final status (Top center) - prepend round for tournament games
-        status_text = game.get("period_text", "Final")
+        status_text = game.get("period_text", "Final Score")
         if self._get_mm_setting(game, 'show_round') and game.get("is_tournament") and game.get("tournament_round"):
             candidate = f"{game['tournament_round']} {status_text}"
             if draw.textlength(candidate, font=self.fonts['time']) <= self.display_width - 40:
@@ -500,7 +500,7 @@ class GameRenderer:
                 spread_text = str(favored_spread)
                 font = self.fonts["detail"]
                 
-                if favored_side == "home":
+                if favored_side == "away":
                     spread_width = draw.textlength(spread_text, font=font)
                     spread_x = self.display_width - spread_width
                     spread_y = 0
@@ -517,9 +517,9 @@ class GameRenderer:
                 font = self.fonts["detail"]
                 ou_width = draw.textlength(ou_text, font=font)
                 
-                if favored_side == "home":
+                if favored_side == "away":
                     ou_x = 0
-                elif favored_side == "away":
+                elif favored_side == "home":
                     ou_x = self.display_width - ou_width
                 else:
                     ou_x = (self.display_width - ou_width) // 2
@@ -547,21 +547,21 @@ class GameRenderer:
         record_height = record_bbox[3] - record_bbox[1]
         record_y = self.display_height - record_height - 4
 
-        # Away team info
-        if away_abbr:
-            away_text = self._get_team_display_text(away_abbr, away_record, game, "away")
-            if away_text:
-                away_record_x = 3
-                self._draw_text_with_outline(draw, away_text, (away_record_x, record_y), record_font)
-
         # Home team info
         if home_abbr:
             home_text = self._get_team_display_text(home_abbr, home_record, game, "home")
             if home_text:
-                home_record_bbox = draw.textbbox((0, 0), home_text, font=record_font)
-                home_record_width = home_record_bbox[2] - home_record_bbox[0]
-                home_record_x = self.display_width - home_record_width - 3
+                home_record_x = 3
                 self._draw_text_with_outline(draw, home_text, (home_record_x, record_y), record_font)
+
+        # Away team info
+        if away_abbr:
+            away_text = self._get_team_display_text(away_abbr, away_record, game, "away")
+            if away_text:
+                away_record_bbox = draw.textbbox((0, 0), away_text, font=record_font)
+                away_record_width = home_record_bbox[2] - away_record_bbox[0]
+                away_record_x = self.display_width - away_record_width - 3
+                self._draw_text_with_outline(draw, away_text, (away_record_x, record_y), record_font)
 
     def _get_team_display_text(self, abbr: str, record: str, game: Optional[Dict] = None, side: str = "") -> str:
         """Get the display text for a team (seed, ranking, or record)."""
