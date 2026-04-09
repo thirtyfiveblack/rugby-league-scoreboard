@@ -510,10 +510,14 @@ class SportsCore(ABC):
     ) -> Optional[Image.Image]:
         """Load and resize a team logo, with caching and automatic download if missing."""
         self.logger.debug(f"Logo path: {logo_path}")
-        if team_abbrev in self._logo_cache:
-            self.logger.debug(f"Using cached logo for {team_abbrev}")
-            return self._logo_cache[team_abbrev]
+        #if team_abbrev in self._logo_cache:
+            #self.logger.debug(f"Using cached logo for {team_abbrev}")
+            #return self._logo_cache[team_abbrev]
+        if team_id in self._logo_cache:
+            self.logger.debug(f"Using cached logo for {team_abbrev} ({team_id})")
+            return self._logo_cache[team_id]
 
+        
         try:
             # Try different filename variations first (for cases like TA&M vs TAANDM)
             actual_logo_path = None
@@ -560,7 +564,8 @@ class SportsCore(ABC):
             max_width = int(self.display_width * 1.5)
             max_height = int(self.display_height * 1.5)
             logo.thumbnail((max_width, max_height), Image.Resampling.LANCZOS)
-            self._logo_cache[team_abbrev] = logo
+            #self._logo_cache[team_abbrev] = logo
+            self._logo_cache[team_id] = logo
             return logo
 
         except Exception as e:
