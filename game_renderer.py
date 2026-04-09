@@ -187,7 +187,8 @@ class GameRenderer:
                     # Use league+teamid+abbrev as cache key to avoid cross-league collisions
                     cache_key = f"{league}:{abbr}:{id}"
                     if cache_key not in self._logo_cache:
-                        logo_path = game.get(f'{team_key.replace("abbr", "logo_path")}', '')
+                        #logo_path = game.get(f'{team_key.replace("abbr", "logo_path")}', '')
+                        logo_path = game.get(f'{team_key.replace("id", "logo_path")}', '')
                         if logo_path:
                             logo = self._load_and_resize_logo(abbr, id, logo_path, league)
                             if logo:
