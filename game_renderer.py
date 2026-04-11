@@ -217,7 +217,6 @@ class GameRenderer:
         """
         # Use league+abbrev as cache key to avoid cross-league collisions
         cache_key = f"{league}:{team_abbrev}:{team_id}"
-        self.logger.info(f"game_renderer.py CACHE_KEY 219 {cache_key}")
         if cache_key in self._logo_cache:
             return self._logo_cache[cache_key]
         
@@ -246,6 +245,7 @@ class GameRenderer:
                 logo_dir = Path(self.logo_dirs.get(league, 'assets/sports/nrl_logos'))
                 #logo_file = logo_dir / f"{team_abbrev}.png"
                 logo_file = logo_dir / f"{team_id}.png"
+                self.logger.info(f"game_renderer.py 248 {cache_key} & {logo_file}")
                 if logo_file.exists():
                     with Image.open(logo_file) as img:
                         if img.mode != "RGBA":
