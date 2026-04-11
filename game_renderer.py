@@ -217,6 +217,7 @@ class GameRenderer:
         """
         # Use league+abbrev as cache key to avoid cross-league collisions
         cache_key = f"{league}:{team_abbrev}:{team_id}"
+        self.logger.info(f"game_renderer.py CACHE_KEY 219 {cache_key}")
         if cache_key in self._logo_cache:
             return self._logo_cache[cache_key]
         
