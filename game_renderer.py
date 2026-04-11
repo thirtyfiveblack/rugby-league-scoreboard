@@ -190,6 +190,7 @@ class GameRenderer:
                         #logo_path = game.get(f'{team_key.replace("abbr", "logo_path")}', '')
                         logo_path = game.get(f'{team_key.replace("id", "logo_path")}', '')
                         if logo_path:
+                            self.logger.info(f"game_renderer.py 193 {id} {abbr} {logo_path}")
                             logo = self._load_and_resize_logo(abbr, id, logo_path, league)
                             if logo:
                                 self._logo_cache[cache_key] = logo
@@ -245,7 +246,7 @@ class GameRenderer:
                 logo_dir = Path(self.logo_dirs.get(league, 'assets/sports/nrl_logos'))
                 #logo_file = logo_dir / f"{team_abbrev}.png"
                 logo_file = logo_dir / f"{team_id}.png"
-                self.logger.info(f"game_renderer.py 248 {cache_key} & {logo_file}")
+                #self.logger.info(f"game_renderer.py 248 {cache_key} & {logo_file}")
                 if logo_file.exists():
                     with Image.open(logo_file) as img:
                         if img.mode != "RGBA":
