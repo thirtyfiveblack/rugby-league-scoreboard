@@ -1082,7 +1082,7 @@ class SportsCore(ABC):
                 "home_id": home_team["id"],
                 "home_score": home_score,
                 "home_logo_path": self.logo_dir
-                / Path(f"{LogoDownloader.normalize_abbreviation(home_abbr)}.png"),
+                / Path(f"{LogoDownloader.normalize_abbreviation(home_team["id"])}.png"),
                 "home_logo_url": home_logo_url,
                 "home_record": home_record,
                 "away_record": away_record,
@@ -1090,7 +1090,7 @@ class SportsCore(ABC):
                 "away_id": away_team["id"],
                 "away_score": away_score,
                 "away_logo_path": self.logo_dir
-                / Path(f"{LogoDownloader.normalize_abbreviation(away_abbr)}.png"),
+                / Path(f"{LogoDownloader.normalize_abbreviation(away_team["id"])}.png"),
                 "away_logo_url": away_logo_url,
                 "is_within_window": True,  # Whether game is within display window
             }
