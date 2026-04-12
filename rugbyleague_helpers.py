@@ -56,6 +56,7 @@ class RugbyLeagueHelpers:
     def load_and_resize_logo(self, team_abbrev: str, team_id: str, logo_path: Path) -> Optional[Image.Image]:
         """Load and resize a team logo, with caching."""
         self.logger.debug(f"Loading logo for {team_abbrev} ({team_id}) from {logo_path}")
+        self.logger.info(f"rugbyleague_helpers.py 59 Loading logo for {team_abbrev} ({team_id}) from {logo_path}")
         
         # Check cache first
         cache_key = f"{team_abbrev}:{team_id}"
