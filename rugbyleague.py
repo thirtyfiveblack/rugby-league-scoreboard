@@ -168,7 +168,9 @@ class RugbyLeagueLive(RugbyLeague, SportsLive):
             draw_overlay = ImageDraw.Draw(overlay)
 
             home_logo = self._load_and_resize_logo(game["home_id"], game["home_abbr"], game["home_logo_path"], game.get("home_logo_url"))
+            self.logger.info(f"rugbyleague.py Line 171 {home_logo}.")
             away_logo = self._load_and_resize_logo(game["away_id"], game["away_abbr"], game["away_logo_path"], game.get("away_logo_url"))
+            self.logger.info(f"rugbyleague.py Line 173 {away_logo}.")
 
             if not home_logo or not away_logo:
                 self.logger.error(f"Failed to load logos for live game: {game.get('id')}")
