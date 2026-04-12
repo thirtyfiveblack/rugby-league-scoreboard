@@ -1574,6 +1574,8 @@ class SportsUpcoming(SportsCore):
             )
             draw_overlay = ImageDraw.Draw(overlay)
 
+            self.logger.info(f"sports.py 1577 {game["home_id"]} {game["home_abbr"]} {game["home_logo_path"]} {game.get("home_logo_url")} ")
+
             home_logo = self._load_and_resize_logo(
                 game["home_id"],
                 game["home_abbr"],
