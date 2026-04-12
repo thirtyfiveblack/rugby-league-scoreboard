@@ -521,7 +521,8 @@ class SportsCore(ABC):
         try:
             # Try different filename variations first (for cases like TA&M vs TAANDM)
             actual_logo_path = None
-            filename_variations = LogoDownloader.get_logo_filename_variations(team_abbrev)
+            #filename_variations = LogoDownloader.get_logo_filename_variations(team_abbrev)
+            filename_variations = LogoDownloader.get_logo_filename_variations(team_id)
             
             for filename in filename_variations:
                 test_path = logo_path.parent / filename
