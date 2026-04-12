@@ -1082,7 +1082,7 @@ class SportsCore(ABC):
                 "home_id": home_team["id"],
                 "home_score": home_score,
                 "home_logo_path": self.logo_dir
-                / Path(f"{LogoDownloader.normalize_abbreviation(home_abbr)}.png"),
+                / Path(f"{LogoDownloader.(home_id)}.png"),
                 "home_logo_url": home_logo_url,
                 "home_record": home_record,
                 "away_record": away_record,
@@ -1090,11 +1090,13 @@ class SportsCore(ABC):
                 "away_id": away_team["id"],
                 "away_score": away_score,
                 "away_logo_path": self.logo_dir
-                / Path(f"{LogoDownloader.normalize_abbreviation(away_abbr)}.png"),
+                / Path(f"{LogoDownloader.(away_id)}.png"),
                 "away_logo_url": away_logo_url,
                 "is_within_window": True,  # Whether game is within display window
             }
 
+            #/ Path(f"{LogoDownloader.normalize_abbreviation(home_abbr)}.png"),
+            #/ Path(f"{LogoDownloader.normalize_abbreviation(away_abbr)}.png"),
             # --- Tournament metadata extraction (March Madness) ---
             competition_type = competition.get("type", {})
             is_tournament = competition_type.get("abbreviation") == "TRNMNT"
@@ -1573,7 +1575,7 @@ class SportsUpcoming(SportsCore):
             )
             draw_overlay = ImageDraw.Draw(overlay)
 
-            self.logger.info(f"sports.py 1577 {game["home_id"]} {game["home_abbr"]} {game["home_logo_path"]} {game.get("home_logo_url")} ")
+            #self.logger.info(f"sports.py 1577 {game["home_id"]} {game["home_abbr"]} {game["home_logo_path"]} {game.get("home_logo_url")} ")
 
             home_logo = self._load_and_resize_logo(
                 game["home_id"],
