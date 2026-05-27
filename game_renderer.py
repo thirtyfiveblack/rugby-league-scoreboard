@@ -363,7 +363,7 @@ class GameRenderer:
         # Draw scores (centered)
         home_score = str(game.get("home_score", "0"))
         away_score = str(game.get("away_score", "0"))
-        score_text = f"{home_score}-{away_score}"
+        score_text = f"H{home_score}-A{away_score}"
         score_width = draw_overlay.textlength(score_text, font=self.fonts['score'])
         score_x = (self.display_width - score_width) // 2
         score_y = (self.display_height // 2) - 3
