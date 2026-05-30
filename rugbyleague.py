@@ -183,11 +183,15 @@ class RugbyLeagueLive(RugbyLeague, SportsLive):
             center_y = display_height // 2
 
             # Draw logos
-            home_x = display_width - home_logo.width + 10
+#            home_x = display_width - home_logo.width + 10
+#            home_y = center_y - (home_logo.height // 2)
+            home_x = -10
             home_y = center_y - (home_logo.height // 2)
             main_img.paste(home_logo, (home_x, home_y), home_logo)
 
-            away_x = -10
+#            away_x = -10
+#            away_y = center_y - (away_logo.height // 2)
+            away_x = display_width - away_logo.width + 10
             away_y = center_y - (away_logo.height // 2)
             main_img.paste(away_logo, (away_x, away_y), away_logo)
 
@@ -272,7 +276,8 @@ class RugbyLeagueLive(RugbyLeague, SportsLive):
             
             home_score = format_score(game.get("home_score", "0"))
             away_score = format_score(game.get("away_score", "0"))
-            score_text = f"{away_score}-{home_score}"
+#            score_text = f"{away_score}-{home_score}"
+            score_text = f"{home_score}-{away_score}"
             score_width = draw_overlay.textlength(score_text, font=self.fonts['score'])
             score_x = (display_width - score_width) // 2
             score_y = (display_height // 2) - 3
